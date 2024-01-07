@@ -5,11 +5,15 @@ import dotenv from 'dotenv';
 import connectDb from './db/index.js';
 
 dotenv.config({ path: './env' });
+
 const app = express();
 const PORT = process.env.PORT || 5500;
 
 connectDb().then(() => {
     try {
+        app.get('/', (req, res) => {
+            res.send('My Home page');
+        })
         app.listen(PORT, () => {
             console.log(`Application is listeing on http://localhost:${PORT}`);
         })
