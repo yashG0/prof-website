@@ -58,11 +58,12 @@ userSchema.pre("save", async function (next) {
     }
 })
 
-
+// FOR PASSWORD CHECKING
 userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
+// METHOD FOR ACCESS TOKEN
 userSchema.methods.generateAccessToken = function(){
     return jwt.sign({
         _id:this._id,
@@ -76,6 +77,7 @@ userSchema.methods.generateAccessToken = function(){
     })
 }
 
+// METHOD FOR REFESH TOKEN
 userSchema.methods.generateRefreshToken = function(){
     return jwt.sign({
         _id:this._id,
